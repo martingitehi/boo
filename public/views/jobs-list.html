@@ -1,0 +1,31 @@
+<div class="container" ng-init="getJobs()">
+    <div class="row">
+        <table class="table table-striped">
+            <tr>
+                <th>Job Date</th>
+                <th>From</th>
+                <th>Job Type</th>
+                <th>Details</th>
+                <th>Payment Offer</th>
+                <th>Due Date</th>
+                <th>Options</th>
+            </tr>
+            <tr dir-paginate="job in jobs | itemsPerPage:10">
+                <td>{{job.created_on | date:'MMM d, yyyy hh:mm'}}</td>
+                <td>{{job.job_owner}}</td>
+                <td>{{job.job_category}}</td>
+                <td>{{job.job_description}}</td>
+                <td>{{job.payment_offer | currency: 'KES' :2}}</td>
+                <td>{{job.job_due_date | date:'MMM d, yyyy hh:mm'}}</td>
+                <td>
+                    <button class="btn btn-danger" ng-click="removeJob()">
+								<i class="fa fa-trash-o"></i> Delete Job</button>
+                </td>
+            </tr>
+        </table>
+         <p>
+            <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)">                
+            </dir-pagination-controls>
+        </p>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+<div class="jumbotron" style="background-color: white;">
+  <h3 class="display-4 text-muted">Create a new store</h3>
+  <hr>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <form ng-submit="addStore()">
+          <div class="form-group">
+            <label><strong>Store Name</strong></label>
+            <input type="text" class="form-control" ng-model="store.store_name" placeholder="Name your store" required>
+          </div>
+          <div class="form-group">
+            <label><strong>Type of Store</strong></label>
+            <select ng-model="store.store_type" class="form-control" required>
+            <option value="Clothing">Clothing</option>
+             <option value="Jewellery">Jewellery</option>
+            <option value="Cosmetics">Cosmetics</option>
+               <option value="Fashion Store">Fashion Store</option>
+            <option value="Beauty Salon">Beauty Salon</option>
+            <option value="Electronics">Electronics</option>
+             <option value="Computers and Mobile Phones">Computers and Mobile Phones</option>
+              <option value="Massages and Spa Services">Massages and Spa Services</option>
+            <option value="Hotel and Catering">Hotel and Catering</option>
+             <option value="Software">Software</option>
+          </select>
+          </div>
+          <div class="form-group">
+            <label><strong>Store Location</strong></label>
+            <input type="text" class="form-control" ng-model="store.store_location" required>
+          </div>
+          <label class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" ng-model="store.delivery_policy">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">We deliver products to customers</span>
+          </label>
+          <div class="form-group">
+            <label><strong>Mobile Number</strong></label>
+            <input type="text" class="form-control" ng-model="store.contact.mobile" placeholder="Mobile Phone" required />
+          </div>
+          <div class="form-group">
+            <label><strong>Email address</strong></label>
+            <input type="email" class="form-control" ng-model="store.contact.email" placeholder="Email address" />
+          </div>
+          <div class="form-group">
+            <label><strong>Website</strong></label>
+            <input type="text" class="form-control" ng-model="store.contact.website" placeholder="Website" />
+          </div>
+          <div class="form-group">
+            <label><strong>Accepted Payments</strong></label>
+            <select ng-model="store.accepted_payments" class="form-control" multiple aria-multiselectable="true" required>
+            <option value="Cash">Cash</option>
+            <option value="MPESA">M-PESA</option>
+              <option value="Visa">Visa</option>
+               <option value="MasterCard">MasterCard</option>
+                <option value="Amex">Amex</option>
+          </select>
+          </div>
+          <div class="form-group">
+            <label><strong>About</strong></label>
+            <textarea type="text" class="form-control" ng-model="store.about" placeholder="Write a brief description of your store e.g. what you sell"
+              maxlength="200"></textarea>
+          </div>
+          <!--<div class="form-group">
+            <p>Select a File to Load:</p>
+            <input id="inputFileToLoad" type="file" class="form-control" onchange="loadImageFileAsURL();" />
+            <p>File Contents as DataURL:</p>
+            <textarea id="textAreaFileContents" style="width:640;height:240" ng-model="store.image"></textarea>
+          </div>-->
+
+          <p>
+            <button type="submit" class="btn btn-success">Create My Store</button>
+            <a href="#/stores" class="btn btn-danger">Cancel</a>
+          </p>
+          <img src="" alt="">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function loadImageFileAsURL() {
+    var filesSelected = document.getElementById("inputFileToLoad").files;
+    if (filesSelected.length > 0) {
+      var fileToLoad = filesSelected[0];
+
+      var fileReader = new FileReader();
+
+      fileReader.onload = function (fileLoadedEvent) {
+        var textAreaFileContents = document.getElementById("textAreaFileContents");
+        textAreaFileContents.innerHTML = "";
+        textAreaFileContents.innerHTML = fileLoadedEvent.target.result;
+      };
+
+      fileReader.readAsDataURL(fileToLoad);
+    }
+  }
+
+</script>

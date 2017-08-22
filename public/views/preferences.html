@@ -1,0 +1,40 @@
+<div class="container-fluid" ng-init="getUserWithStores()">
+    <div class="row">
+        <main>
+            <div class="jumbotron" style="background-color: white;">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <h3 class="display-4 text-primary">{{store_info.length}} Stores</h1>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <a href="#/stores/add" class="btn btn-default pull-right">
+                        <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <hr />
+                <section class="row">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Store Name</th>
+                            <th>Location</th>
+                            <th class="text-right">Visits</th>
+                            <th class="text-center">Opened</th>
+                            <th class="text-center">See Store</th>
+                        </tr>
+                        <tr ng-repeat="store in store_info">
+                            <td>{{store.store_name}}</td>
+                            <td>{{store.store_location}}</td>
+                            <td>{{store.visits}}</td>
+                            <td class="text-center">{{store.created_on | date:'MMM d, yyyy'}}</td>
+                            <td class="text-center">
+                                <a class="btn btn-default" ng-href="#/stores/{{store._id}}"><i class="fa fa-home"></i></a>
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+            </div>
+        </main>
+    </div>
+</div>
