@@ -9,15 +9,15 @@ var mongoose = require('mongoose');
 
 /* GET home page. */
 router.get('/', function (req, res) {
-	// Profile.findById(req.params.id, function (err, profile) {
-	// 	if (err) {
-	// 		res.send(err.message);
-	// 	}
-	// 	else {
-	// 		res.json({profile:profile});
-	// 	}
-	// });
-	res.render('index');
+	Profile.find({}, (err, profiles) => {
+		if (err) {
+			res.send(err.message);
+		}
+		else {
+			res.render('index', { profiles: profiles });
+		}
+	});
+	
 });
 
 module.exports = router;

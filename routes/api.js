@@ -32,12 +32,12 @@ router.get('/profiles/:id', function (req, res) {
 router.post('/profiles', (req, res, next) => {
 	var profile = new Profile(req.body);
 
-	profile.save().then(function (err, cb) {
+	profile.save(function (err, cb) {
 		if (err) {
 			res.status(500).json({ message: err.message });
 		}
 		else {
-			res.status(200).json(`Registration successful for ${cb.fullname}.`);
+			res.json(`Registration successful for ${profile.fullname}.`);
 		}
 	});
 });

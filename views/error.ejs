@@ -1,3 +1,15 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<code><%= error.stack %></code>
+<head>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<div class="container">
+    <h1 class="text-danger">
+        <%= message %>
+    </h1>
+    <hr />
+    <h4>
+       Error <%= error.status %>
+    </h4>
+    <hr />
+    <h5>Stack Trace</h5>
+    <code class="text-info"><%= error.stack %></code>
+</div>
