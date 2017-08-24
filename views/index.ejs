@@ -26,7 +26,7 @@
 
 <body style="font-family: 'Varela Round';">
   <div class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
   <a class="navbar-brand" href="/">Boo</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -61,7 +61,7 @@
                 <span id="badge-round">26</span>
                 <img src="<%= profile.avatar_url %>" class="img-fluid card-img-top" />
               </div>
-              <div class="card-block">
+              <div class="card-body">
                 <h3 class="card-title">
                   <%= profile.fullname %>
                 </h3>
