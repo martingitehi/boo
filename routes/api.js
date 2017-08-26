@@ -24,7 +24,7 @@ router.get('/profiles/:id', function (req, res) {
 			res.send(err.message);
 		}
 		else {
-			res.json({ profile: profile });
+			res.render('profile', { profile: profile });
 		}
 	});
 });
@@ -34,12 +34,37 @@ router.post('/profiles', (req, res, next) => {
 
 	profile.save(function (err, cb) {
 		if (err) {
-			res.status(500).json({ message: err.message });
+			return res.status(500).json({ message: err.message });
 		}
 		else {
-			res.json(`Registration successful for ${profile.fullname}.`);
+			return res.json(`Registration successful for ${profile.fullname}.`);
 		}
 	});
 });
+
+router.put('/profiles/:id', (req, res, next) => {
+	var id = req.params.id;
+	console.log({ body: req.body, id: id });
+	Profile.findOneAndUpdate({ _id: id }, req.body, (err, doc) => {
+		if (err) {
+			return res.json(err.message);
+		}
+		else {
+			return res.json({ message: 'Update complete', doc: doc });
+		}
+	})
+});
+
+router.delete('/profiles/:id', (req, res, next) => {
+	var id = mongoose.SchemaTypes.ObjectId(req.params.id);
+	Profile.remove({ _id: id }, (err) => {
+		if (err) {
+			return res.json(err.message);
+		}
+		else {
+			return res.json('Profile deleted successfully.');
+		}
+	})
+})
 
 module.exports = router;

@@ -16,8 +16,11 @@ router.get('/', function (req, res) {
 		else {
 			res.render('index', { profiles: profiles });
 		}
-	});
-	
+	});	
+});
+
+router.get('/login', (req, res, next) => {
+	res.render('login');
 });
 
 module.exports = router;

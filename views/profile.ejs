@@ -1,0 +1,66 @@
+<% include ./partials/head %>
+
+    <body style="font-family: 'Varela Round';">
+        <div class="container-fluid">
+           <% include ./partials/navbar %>
+        </div>
+        <div class="container" style="margin-top: 100px;">
+            <div class="row">
+                <div class="col-md-3 col-xs-12">
+                    <img src="../../<%= profile.avatar_url %>" class="img-fluid" alt="">
+                </div>
+                <div class="col-md-9 col-xs-12">
+                    <h3 class="text-primary">
+                        <%= profile.fullname %>
+                    </h3>
+
+                    <p class="text-muted">
+                        <a href="<%= profile.social.fb %>" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-facebook"></i> <small>Facebook</small>
+                        </a>
+                        <a href="<%= profile.social.instagram %>" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-instagram"></i> <small>Instagram</small>
+                        </a>
+                        <a href="/holla" class="btn btn-success btn-sm">
+                            <i class="fa fa-plus"></i> <small>Add</small>
+                        </a>
+                        <a href="/request" class="btn btn-success btn-sm">
+                            <i class="fa fa-envelope"></i> <small>Message</small>
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="card card-margin">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <i class="fa fa-heart"></i> About Me
+                    </h4>
+                    <hr />
+                    <p>
+                        <%= profile.about %>
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <% profile.interests.others.forEach(function(interest, index){ %>
+                        <span class="badge badge-pill badge-warning"><%= interest %></span>
+                        <% }) %>
+                </div>
+            </div>
+            <div class="card card-margin">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <i class="fa fa-male"></i> Body Type
+                    </h4>
+                    <hr />
+                    <p>
+                        <%= profile.physique %>
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <% profile.interests.others.forEach(function(interest, index){ %>
+                        <span class="badge badge-pill badge-warning"><%= interest %></span>
+                        <% }) %>
+                </div>
+            </div>
+        </div>
+    </body>

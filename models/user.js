@@ -22,6 +22,14 @@ var profileSchema = new mongoose.Schema({
 		email: { type: String, required: true },
 		mobile: { type: String, required: true }
 	},
+	relationships: {
+		status: { type: String, required: true },
+		goal: { type: String, required: true },
+		family:{
+			has_kids:{type:Boolean, required:true},
+			no_of_kids:{type:Number, required:true, default:0}
+		}
+	},
 	interests: {
 		sex: { type: String, required: true },
 		others: { type: Array, required: false }

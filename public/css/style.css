@@ -8,8 +8,22 @@
   position: relative;
 }
 
-#image{
+.img {
   position: relative;
+  padding-bottom: 100%;
+  overflow: hidden;
+  height: 100px;
+  width: 100%;
+  display: block;
+}
+
+.card-padding{
+  padding-bottom:5px;
+}
+
+.card-margin{
+  margin-top:20px;
+  margin-bottom:20px;
 }
 
 #badge-round{
@@ -19,13 +33,16 @@
   position: absolute;
   font-size: 15pt;
   text-align: center;
-  top: -10px;
-  right: -10px;
+  bottom: -2px;
+  right: 45%;
   border: 3px solid white;
   border-radius: 50%;
   padding:2px;
   width:40px;
   height: 40px;
+  box-shadow: 0px 4px 15px -4px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 4px 15px -4px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0px 4px 15px -4px rgba(0,0,0,0.3);
 }
 
 #badge {
@@ -46,8 +63,13 @@
   filter: alpha(opacity=65);
 }
 
+/* .title{
+  @include media-breakpoint-only(lg) {
+    margin-top: 10px;
+  }
+} */
+
 .card{
-  margin: 3%;
    box-shadow: 0px 4px 15px -4px rgba(0,0,0,0.3);
     -moz-box-shadow: 0px 4px 15px -4px rgba(0,0,0,0.3);
     -webkit-box-shadow: 0px 4px 15px -4px rgba(0,0,0,0.3);
