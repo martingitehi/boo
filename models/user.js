@@ -25,9 +25,23 @@ var profileSchema = new mongoose.Schema({
 	relationships: {
 		status: { type: String, required: true },
 		goal: { type: String, required: true },
-		family:{
-			has_kids:{type:Boolean, required:true},
-			no_of_kids:{type:Number, required:true, default:0}
+		family: {
+			has_kids: { type: Boolean, required: true },
+			no_of_kids: { type: Number, required: true, default: 0 }
+		}
+	},
+	lifestyle: {
+		drinks: { type: String, required: true },
+		smokes: { type: String, required: true },
+	},
+	health: {
+		hiv_status: {
+			status: { type: String, required: true },
+			last_tested: { type: Date, required: true }
+		},
+		disability: {
+			is_disabled: { type: Boolean, required: true, default: false },
+			disability_type: { type: String, required: true }
 		}
 	},
 	interests: {
