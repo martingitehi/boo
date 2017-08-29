@@ -1,6 +1,18 @@
 #!/usr/bin/env node
 var debug = require('debug')('Start');
+var https = require('https');
+var fs = require('fs');
 var app = require('../app');
+
+//set https key and certificate
+var privateKey = fs.readFileSync('cert/key.pem').toString();
+var certificate = fs.readFileSync('cert/certificate.pem').toString();  
+
+//enable HTTPS
+https.createServer({key: privateKey, cert: certificate}, app).listen(443);
+
+//enable HTTP
+http.createServer(app).listen(80);
 
 app.set('port', process.env.PORT || 3000);
 

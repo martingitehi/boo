@@ -50,7 +50,7 @@ router.put('/profiles/:id', (req, res, next) => {
 			return res.json(err.message);
 		}
 		else {
-			return res.json({ message: 'Update complete', doc: doc });
+			return res.json({ message: `Update complete for ${doc.username}`});
 		}
 	})
 });
