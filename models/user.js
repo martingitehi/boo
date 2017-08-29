@@ -31,8 +31,8 @@ var profileSchema = new mongoose.Schema({
 		}
 	},
 	lifestyle: {
-		drinks: { type: String, required: true },
-		smokes: { type: String, required: true },
+		drinks: { type: Boolean, required: true },
+		smokes: { type: Boolean, required: true },
 	},
 	health: {
 		hiv_status: {

@@ -21,7 +21,9 @@ mongoose.connection.on('open', function (err) {
     if (err) {
         return console.log(err.message);
     }
-    return console.log('Boo is Connected.');
+    else {
+        return console.log('Boo is Connected.');
+    }
 });
 
 var app = express();
@@ -54,6 +56,7 @@ app.use('/api', api);
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
+
 //// Initialize Passport
 require('./passport-init')(passport);
 app.use(passport.session());

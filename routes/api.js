@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Profile = require('../models/user');
 var csrf = require('csurf');
-var token = csrf();
+//var token = csrf();
 var mongoose = require('mongoose');
 
 //router.use(token);
@@ -37,7 +37,7 @@ router.post('/profiles', (req, res, next) => {
 			return res.status(500).json({ message: err.message });
 		}
 		else {
-			return res.json(`Registration successful for ${profile.fullname}.`);
+			return res.json(`Registration successful for ${profile.username}.`);
 		}
 	});
 });
