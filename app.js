@@ -61,15 +61,15 @@ app.use(passport.initialize());
 require('./passport-init')(passport);
 app.use(passport.session());
 
-app.use(function (req, res, next) {
-    res.locals.login = req.isAuthenticated();
-    res.locals.session = req.session;
-    next();
-});
+// app.use(function (req, res, next) {
+//     res.locals.login = req.isAuthenticated();
+//     res.locals.session = req.session;
+//     next();
+// });
 
 //catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    var err = new Error('Not Found');
+    var err = new Error('Oops! Can\'t Find That');
     err.status = 404;
     next(err);
 });

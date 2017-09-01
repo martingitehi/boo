@@ -4,6 +4,7 @@ var Profile = require('../models/user');
 var csrf = require('csurf');
 //var token = csrf();
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt-nodejs');
 
 //router.use(token);
 
@@ -29,40 +30,33 @@ router.get('/profiles/:id', function (req, res) {
 	});
 });
 
-router.post('/profiles', (req, res, next) => {
-	var profile = new Profile(req.body);
-
-	profile.save(function (err, cb) {
+router.put('/profiles/:id', (req, res, next) => {
+	Profile.findById(req.params.id, (err, profile) => {
 		if (err) {
-			return res.status(500).json({ message: err.message });
+			return res.status(500).json({ message: 'Profile update failed. Try again.' });
 		}
 		else {
-			return res.json(`Registration successful for ${profile.username}.`);
+			profile = req.body;
+			Profile.findByIdAndUpdate({_id:req.params.id}, profile, (err, body) => {
+				if (err) {
+					return res.status(500).json(err.message);
+				}
+				else {
+					console.log(body);
+					return res.json(`Update complete for ${profile.username}`);
+				}
+			});
 		}
 	});
 });
 
-router.put('/profiles/:id', (req, res, next) => {
-	var id = req.params.id;
-	console.log({ body: req.body, id: id });
-	Profile.findOneAndUpdate({ _id: id }, req.body, (err, doc) => {
-		if (err) {
-			return res.json(err.message);
-		}
-		else {
-			return res.json({ message: `Update complete for ${doc.username}`});
-		}
-	})
-});
-
 router.delete('/profiles/:id', (req, res, next) => {
-	var id = mongoose.SchemaTypes.ObjectId(req.params.id);
-	Profile.remove({ _id: id }, (err) => {
+	Profile.remove({ _id: req.params.id }, (err) => {
 		if (err) {
 			return res.json(err.message);
 		}
 		else {
-			return res.json('Profile deleted successfully.');
+			return res.json({ message: 'Profile deleted successfully.', docs_left: Profile.count });
 		}
 	})
 })

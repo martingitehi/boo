@@ -52,6 +52,9 @@ var profileSchema = new mongoose.Schema({
 		fb: { type: String },
 		instagram: { type: String }
 	},
+	photos: { 
+		type: Array, required: false, default: [] 
+	},
 	created_at: { type: Date, default: Date.now }
 });
 

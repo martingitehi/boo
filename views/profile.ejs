@@ -1,65 +1,99 @@
 <% include ./partials/head %>
 
-    <body style="font-family: 'Varela Round';">
-        <div class="container-fluid">
-           <% include ./partials/navbar %>
+    <body class="container-fluid" style="font-family: 'Varela Round';">
+        <div>
+            <% include ./partials/navbar %>
         </div>
         <div class="container" style="margin-top: 100px;">
             <div class="row">
-                <div class="col-md-3 col-xs-12">
+                <div class="col-md-3 col-xs-12" style="position:relative;">
                     <img src="../../<%= profile.avatar_url %>" class="img-fluid" alt="">
+                    <div id="badge">
+                        <%= profile.relationships.status %> &middot <%= profile.gender %>
+                    </div>
                 </div>
                 <div class="col-md-9 col-xs-12">
                     <h3 class="text-primary">
                         <%= profile.fullname %>
+                        <span class="badge badge-pill badge-success"><%= profile.relationships.status %></span>
                     </h3>
 
-                    <p class="text-muted">
-                        <a href="<%= profile.social.fb %>" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-facebook"></i> <small>Facebook</small>
-                        </a>
-                        <a href="<%= profile.social.instagram %>" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-instagram"></i> <small>Instagram</small>
-                        </a>
-                        <a href="/holla" class="btn btn-success btn-sm">
-                            <i class="fa fa-plus"></i> <small>Add</small>
-                        </a>
-                        <a href="/request" class="btn btn-success btn-sm">
-                            <i class="fa fa-envelope"></i> <small>Message</small>
-                        </a>
-                    </p>
-                </div>
-            </div>
-            <div class="card card-margin">
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <i class="fa fa-heart"></i> About Me
-                    </h4>
-                    <hr />
                     <p>
                         <%= profile.about %>
                     </p>
-                </div>
-                <div class="card-footer">
-                    <% profile.interests.others.forEach(function(interest, index){ %>
-                        <span class="badge badge-pill badge-warning"><%= interest %></span>
-                        <% }) %>
-                </div>
-            </div>
-            <div class="card card-margin">
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <i class="fa fa-male"></i> Body Type
-                    </h4>
-                    <hr />
-                    <p>
-                        <%= profile.physique %>
+
+                    <div class="card-footer">
+                        <% profile.interests.others.forEach(function(interest, index){ %>
+                            <span class="badge badge-pill badge-warning"><%= interest %></span>
+                            <% }) %>
+                    </div>
+
+                    <p class="text-muted">
+                        <a href="<%= profile.social.fb %>" class="btn btn-sm btn-outline-primary">
+                                    <i class="fa fa-facebook"></i> <small>Facebook</small>
+                                </a>
+                        <a href="<%= profile.social.instagram %>" class="btn btn-sm btn-outline-primary">
+                                    <i class="fa fa-instagram"></i> <small>Instagram</small>
+                                </a>
+                        <a href="/holla" class="btn btn-outline-primary btn-sm">
+                                    <i class="fa fa-plus"></i> <small>Add</small>
+                                </a>
+                        <a href="/request" class="btn btn-outline-primary btn-sm">
+                                    <i class="fa fa-envelope"></i> <small>Message</small>
+                                </a>
                     </p>
                 </div>
-                <div class="card-footer">
-                    <% profile.interests.others.forEach(function(interest, index){ %>
-                        <span class="badge badge-pill badge-warning"><%= interest %></span>
-                        <% }) %>
+            </div>
+            <div class="row">
+                <div class="card card-margin">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <i class="fa fa-male"></i> More
+                        </h4>
+                        <hr />
+                        <div class="row">
+                            <div class="list-group col-md-6 col-xl-6 col-xs-12 col-sm-12">
+                                <li class="list-group-item active">
+                                    Physical Attributes
+                                </li>
+                                <li class="list-group-item">
+                                    Complexion <span class="badge badge-danger pull-right">
+                                <%= profile.physique.complexion %>
+                                </span>
+                                </li>
+                                <li class="list-group-item">
+                                    Height <span class="badge badge-danger pull-right">
+                               <%= profile.physique.height %>
+                               </span>
+                                </li>
+                                <li class="list-group-item">
+                                    Weight <span class="badge badge-secondary pull-right">
+                                <%= profile.physique.weight %>
+                                </span>
+                                </li>
+                            </div>
+                            <div class="list-group col-md-6 col-xl-6 col-xs-12 col-sm-12">
+                                <li class="list-group-item active">
+                                    Relationships
+                                </li>
+                                <li class="list-group-item">
+                                    Kids <span class="badge badge-danger pull-right">
+                                    <%= profile.relationships.family.has_kids == true ? profile.relationships.family.no_of_kids : 'None' %>
+                                    </span>
+                                </li>
+                                <li class="list-group-item">
+                                    Status <span class="badge badge-danger pull-right">
+                                   <%= profile.relationships.status %>
+                                   </span>
+                                </li>
+                                <li class="list-group-item">
+                                    Looking for <span class="badge badge-secondary pull-right">
+                                    <%= profile.relationships.goal %>
+                                    </span>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

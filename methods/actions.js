@@ -5,21 +5,20 @@ var bcrypt = require('bcrypt-nodejs');
 
 var functions = {
     login: function (req, res, next) {
-        User.findOne({ username: req.body.username }, function (err, user) {
+        Profile.findOne({ username: req.body.username }, function (err, profile) {
             if (err) {
                 res.json({ message: 'An error occured signing in.' });
-                next();
             }
 
-            if (!user) {
+            else if (!profile) {
                 return res.json({ success: false, message: 'Authentication failed. ' + req.body.username + ' not found.' });
             }
 
             else {
-                var isMatch = bcrypt.compareSync(req.body.password, user.password);
+                var isMatch = bcrypt.compareSync(req.body.password, profile.password);
 
                 if (isMatch) {
-                    var token = jwt.encode(user, config.secret);
+                    var token = jwt.encode(profile, config.secret);
                     return res.json({ success: true, token: token });
                 }
                 else {
@@ -33,8 +32,8 @@ var functions = {
             return res.json({ success: false, msg: 'Enter all values' });
         }
         else {
-            // find a user in mongo with provided username
-            Profile.findOne({ username: req.body.username }, function (err, user) {
+            // find a profile in mongo with provided username
+            Profile.findOne({ username: req.body.username }, function (err, profile) {
                 // In case of any error, return using the done method
                 if (err) {
                     console.log('Error in SignUp: ' + err);
@@ -42,22 +41,18 @@ var functions = {
                     next();
                 }
                 // already exists
-                if (user) {
-                    console.log('User already exists with username: ' + req.body.username);
+                if (profile) {
+                    console.log('Profile already exists with username: ' + req.body.username);
                     res.status(401.2).json({ success: false, message: 'Sorry ' + req.body.username + ' is already taken.' });
                 } else {
-                    // if there is no user, create the user
-                    var newUser = new Profile();
-
-                    // set the user's local credentials
-                    newUser.username = req.body.username;
-                    newUser.fullname = req.body.fullname;
-                    newUser.contact.email = req.body.contact.email;
-                    newUser.contact.mobile = req.body.contact.mobile;
-                    newUser.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-
-                    // save the user
-                    newUser.save(function (err) {
+                    // if there is no profile, create the profile
+                    req.body.photos=['images/pic (2).jpg','images/pic (5).jpg','images/pic (6).jpg'];
+                    let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+                    req.body.password = password;
+                    var newProfile = new Profile(req.body);
+                                      
+                    // save the profile
+                    newProfile.save(function (err) {
                         if (err) {
                             console.log('Error in SignUp: ' + err.message);
                             res.status(500).json({ success: false, message: `An error occured signing up: ${err.message}` });
