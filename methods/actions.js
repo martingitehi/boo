@@ -46,7 +46,6 @@ var functions = {
                     res.status(401.2).json({ success: false, message: 'Sorry ' + req.body.username + ' is already taken.' });
                 } else {
                     // if there is no profile, create the profile
-                    req.body.photos=['images/pic (2).jpg','images/pic (5).jpg','images/pic (6).jpg'];
                     let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
                     req.body.password = password;
                     var newProfile = new Profile(req.body);
