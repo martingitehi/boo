@@ -43,13 +43,28 @@ var functions = {
                 // already exists
                 if (profile) {
                     console.log('Profile already exists with username: ' + req.body.username);
-                    res.status(401.2).json({ success: false, message: 'Sorry ' + req.body.username + ' is already taken.' });
+                    res.json({ success: false, message: 'Sorry ' + req.body.username + ' is already taken.' });
                 } else {
                     // if there is no profile, create the profile
+                    let fnames = ['Ken', 'Tini', 'Joseph', 'Alice', 'Bob', 'Regina', 'George', 'Barnice', 'Renata', 'Kevo', 'Lisa', 'Adam'];
+                    let lnames = ['Ken', 'Linda', 'Joseph', 'Maggie', 'Bob', 'Regina', 'Paulina', 'Barnice', 'Odhiambo', 'Ignacio', 'Lisa', 'Adam'];
                     let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
                     req.body.password = password;
+                    req.body.photos = [];
+                    for (i = 0; i <= 5; i++) {
+                        var id = Math.floor(Math.random() * (99 - 1) + 1);
+                        req.body.photos.push('images/pic (' + id + ').jpg');
+                    }
+
+                    let fname = fnames[Math.floor(Math.random() * (fnames.length - 1) + 1)];
+                    let lname = lnames[Math.floor(Math.random() * (lnames.length - 1) + 1)];
+                    req.body.fullname = fname + ' ' + lname;
+                    req.body.username = `${fname}_${lname}`.toLowerCase();
+                    req.body.avatar_url = req.body.photos[0];
+                    console.log(req.body.fullname);
+                    console.log(req.body.username);
                     var newProfile = new Profile(req.body);
-                                      
+
                     // save the profile
                     newProfile.save(function (err) {
                         if (err) {
