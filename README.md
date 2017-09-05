@@ -1,4 +1,4 @@
 # Kapu
-API for cloud based POS system.
+API for dating and profile matching app.
 
 Visit the site here [https://app-it.io]

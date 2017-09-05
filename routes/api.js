@@ -8,6 +8,17 @@ var bcrypt = require('bcrypt-nodejs');
 
 //router.use(token);
 
+router.get('/', function (req, res) {
+	Profile.find({}, (err, profiles) => {
+		if (err) {
+			res.send(err.message);
+		}
+		else {
+			res.json(profiles);
+		}
+	});	
+});
+
 router.get('/profiles', (req, res, next) => {
 	Profile.find({}, (err, profiles) => {
 		if (err) {
@@ -22,10 +33,10 @@ router.get('/profiles', (req, res, next) => {
 router.get('/profiles/:id', function (req, res) {
 	Profile.findById(req.params.id, function (err, profile) {
 		if (err) {
-			res.send(err.message);
+			res.json(err.message);
 		}
 		else {
-			res.render('profile', { profile: profile });
+			res.json(profile);
 		}
 	});
 });
