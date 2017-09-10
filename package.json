@@ -19,10 +19,12 @@
     "mongodb": "*",
     "mongoose": "*",
     "morgan": "^1.8.1",
+    "multer": "^1.3.0",
     "nodemon": "^1.11.0",
     "passport": "*",
     "passport-jwt": "^2.2.1",
     "passport-local": "*",
+    "socket.io": "^2.0.3",
     "stripe": "^4.18.0"
   }
 }

@@ -6,15 +6,15 @@ var profileSchema = new mongoose.Schema({
 	password: { type: String, required: true },
 	about: { type: String, required: true },
 	fullname: { type: String, required: true },
-	avatar_url: { type: String, required: true },
+	avatar_url: { type: String, required: false },
 	dob: { type: Date, required: true },
 	career: { type: String, required: false },
 	promo_code: { type: String, required: false },
-	nationality: { type: String, required: true },
+	nationality: { type: String, required: true, default:'Kenyan'},
 	physique: {
 		height: { type: Number, required: false },
 		weight: { type: Number, required: false },
-		complexion: { type: String, required: true }
+		complexion: { type: String, required: false }
 	},
 	gender: { type: String, required: true },
 	location: { type: String, required: true },

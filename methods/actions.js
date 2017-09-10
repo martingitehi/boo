@@ -1,5 +1,4 @@
 // Profile API version 1 (v1)
-// License: MIT/Github Licenses
 // Author: Martin Gitehi
 
 var Profile = require('../models/user');
@@ -41,13 +40,11 @@ var functions = {
             Profile.findOne({ username: req.body.username }, function (err, profile) {
                 // In case of any error, return using the done method
                 if (err) {
-                    console.log('Error in SignUp: ' + err);
                     res.status(500).json({ success: false, message: 'An error occured signing up.' });
                     next();
                 }
                 // already exists
                 if (profile) {
-                    console.log('Profile already exists with username: ' + req.body.username);
                     res.json({ success: false, message: `Sorry '${req.body.username}' is already taken.` });
                 } else {
                     let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
@@ -57,14 +54,13 @@ var functions = {
                         var id = Math.floor(Math.random() * (99 - 1) + 1);
                         req.body.photos.push('images/pic (' + id + ').jpg');
                     }
-
+                    req.body.avatar_url = req.body.photos[1];
                     req.body.username = req.body.username.toLowerCase();
                     var newProfile = new Profile(req.body);
 
                     // save the profile
                     newProfile.save(function (err) {
                         if (err) {
-                            console.log('Error in SignUp: ' + err.message);
                             res.status(500).json({ success: false, message: `An error occured signing up: ${err.message}` });
                         }
                         else {

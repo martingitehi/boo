@@ -3,9 +3,11 @@ var router = express.Router();
 var Profile = require('../models/user');
 var csrf = require('csurf');
 //var token = csrf();
+var multer = require('multer');
+var DIR = '../uploads/';
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
-
+var upload = multer({ dest: DIR }).single('photo');
 //router.use(token);
 
 router.get('/', function (req, res) {
@@ -16,8 +18,22 @@ router.get('/', function (req, res) {
 		else {
 			res.json(profiles);
 		}
-	});	
+	});
 });
+
+router.post('/upload', (req, res, next) => {
+	var path = '';
+	upload(req, res, function (err) {
+		if (err) {
+			// An error occurred when uploading
+			console.log(err);
+			return res.status(422).send("an Error occured")
+		}
+		// No error occured.
+		path = req.file.path;
+		return res.send("Upload Completed for " + path);
+	});
+})
 
 router.get('/profiles', (req, res, next) => {
 	Profile.find({}, (err, profiles) => {
@@ -48,7 +64,7 @@ router.put('/profiles/:id', (req, res, next) => {
 		}
 		else {
 			profile = req.body;
-			Profile.findByIdAndUpdate({_id:req.params.id}, profile, (err, body) => {
+			Profile.findByIdAndUpdate({ _id: req.params.id }, profile, (err, body) => {
 				if (err) {
 					return res.status(500).json(err.message);
 				}
@@ -67,7 +83,7 @@ router.delete('/profiles/:id', (req, res, next) => {
 			return res.json(err.message);
 		}
 		else {
-			return res.json({ message: 'Profile deleted successfully.', docs_left: Profile.count });
+			return res.json({ message: 'Profile deleted successfully.' });
 		}
 	})
 })

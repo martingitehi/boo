@@ -1,4 +1,4 @@
-# Kapu
+# Boo
 API for dating and profile matching app.
 
-Visit the site here [https://app-it.io]
+Visit the site here [https://boo-express.herokuapp.com/]
