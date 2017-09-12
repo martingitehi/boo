@@ -2,29 +2,29 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var profileSchema = new mongoose.Schema({
-	username: { type: String, required: true },
-	password: { type: String, required: true },
-	about: { type: String, required: true },
-	fullname: { type: String, required: true },
+	username: { type: String, required: [true, "You must provide a username"] },
+	password: { type: String, required: [true, "You must provide a password"] },
+	about: { type: String, required: [true, "You must provide a description"] },
+	fullname: { type: String, required: [true, "You must provide a fullname"] },
 	avatar_url: { type: String, required: false },
-	dob: { type: Date, required: true },
+	dob: { type: Date, required: [true, "You must provide a date of birth"] },
 	career: { type: String, required: false },
 	promo_code: { type: String, required: false },
-	nationality: { type: String, required: true, default:'Kenyan'},
+	nationality: { type: String, required: true, default: 'Kenyan' },
 	physique: {
 		height: { type: Number, required: false },
 		weight: { type: Number, required: false },
 		complexion: { type: String, required: false }
 	},
-	gender: { type: String, required: true },
-	location: { type: String, required: true },
+	gender: { type: String, required: [true, "You must provide a gender"] },
+	location: { type: String, required: [true, "You must provide a location"] },
 	contact: {
-		email: { type: String, required: true },
-		mobile: { type: String, required: true }
+		email: { type: String, required: [true, "You must provide a email"] },
+		mobile: { type: String, required: [true, "You must provide a mobile"] }
 	},
 	relationships: {
-		status: { type: String, required: true },
-		goal: { type: String, required: true },
+		status: { type: String, required: [true, "You must provide a relationship status"] },
+		goal: { type: String, required:false},
 		family: {
 			has_kids: { type: Boolean, required: true },
 			no_of_kids: { type: Number, required: true, default: 0 }
@@ -52,8 +52,8 @@ var profileSchema = new mongoose.Schema({
 		fb: { type: String },
 		instagram: { type: String }
 	},
-	photos: { 
-		type: Array, required: false, default: [] 
+	photos: {
+		type: Array, required: false, default: []
 	},
 	created_at: { type: Date, default: Date.now }
 });

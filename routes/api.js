@@ -3,11 +3,8 @@ var router = express.Router();
 var Profile = require('../models/user');
 var csrf = require('csurf');
 //var token = csrf();
-var multer = require('multer');
-var DIR = './uploads/';
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
-var upload = multer({ dest: DIR }).single('photo');
 //router.use(token);
 
 router.get('/', function (req, res) {
