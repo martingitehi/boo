@@ -51,7 +51,7 @@ var functions = {
                     req.body.password = password;
                     req.body.photos = [];
                     for (i = 0; i <= 10; i++) {
-                        var id = Math.floor(Math.random() * (79 - 1) + 1);
+                        var id = Math.floor(Math.random() * (18 - 1) + 1);
                         req.body.photos.push('images/pic (' + id + ').jpg');
                     }
                     req.body.avatar_url = req.body.photos[1];
