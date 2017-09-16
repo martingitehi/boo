@@ -46,11 +46,11 @@ router.put('/profile/:id/upload', (req, res) => {
 		}
 		else {
 			let file = req.body.image;
-			console.log(file + ' in api.');
-			//for (let i = 0; i < files; i++) {
-			profile.photos.push(file);
-			//}
-			return res.json(`Upload completed successfully.`);
+			let photos = profile.photos.push(file);
+			Profile.findByIdAndUpdate({ _id: req.params.id }, { $set: { photos: photos } }, (err, cb) => {
+				profile.photos.push(file);
+				return res.json({ message: `Upload completed successfully.`, file: cb });
+			});
 		}
 	});
 });
