@@ -45,11 +45,11 @@ router.put('/profile/:id/upload', (req, res) => {
 			return res.status(500).json({ message: 'Cannot find the user profile' });
 		}
 		else {
-			let files = req.body;
-			console.log(files);
-			for (let i = 0; i < files; i++) {
-				profile.photos.push(files[i]);
-			}
+			let file = req.body.image;
+			console.log(file + ' in api.');
+			//for (let i = 0; i < files; i++) {
+			profile.photos.push(file);
+			//}
 			return res.json(`Upload completed successfully.`);
 		}
 	});
