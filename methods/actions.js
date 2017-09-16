@@ -48,15 +48,7 @@ var functions = {
                     res.json({ success: false, message: `Sorry '${req.body.username}' is already taken.` });
                 } else {
                     let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-                    req.body.password = password;
-                    req.body.photos = [];
-                    for (i = 0; i <= 10; i++) {
-                        var id = Math.floor(Math.random() * (32 - 1) + 1);
-                        req.body.photos.push('images/pic (' + id + ').jpg');                        
-                    }
-                    var id = Math.floor(Math.random() * (32 - 1) + 1);
-                    req.body.avatar_url = 'images/pic (' + id + ').jpg'
-                    
+                    req.body.password = password;                    
                     req.body.username = req.body.username.toLowerCase();
                     var newProfile = new Profile(req.body);
 
