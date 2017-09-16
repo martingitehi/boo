@@ -15,7 +15,7 @@ var functions = {
             }
 
             else if (!profile) {
-                return res.json({ success: false, message: 'Authentication failed. ' + req.body.username + ' not found.' });
+                return res.json({ success: false, message: `Authentication failed. '${req.body.username}' not found.` });
             }
 
             else {
@@ -51,10 +51,12 @@ var functions = {
                     req.body.password = password;
                     req.body.photos = [];
                     for (i = 0; i <= 10; i++) {
-                        var id = Math.floor(Math.random() * (18 - 1) + 1);
-                        req.body.photos.push('images/pic (' + id + ').jpg');
+                        var id = Math.floor(Math.random() * (32 - 1) + 1);
+                        req.body.photos.push('images/pic (' + id + ').jpg');                        
                     }
-                    req.body.avatar_url = req.body.photos[1];
+                    var id = Math.floor(Math.random() * (32 - 1) + 1);
+                    req.body.avatar_url = 'images/pic (' + id + ').jpg'
+                    
                     req.body.username = req.body.username.toLowerCase();
                     var newProfile = new Profile(req.body);
 

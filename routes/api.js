@@ -5,7 +5,6 @@ var csrf = require('csurf');
 //var token = csrf();
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
-//router.use(token);
 
 router.get('/', function (req, res) {
 	Profile.find({}, (err, profiles) => {
@@ -36,6 +35,22 @@ router.get('/profiles/:id', function (req, res) {
 		}
 		else {
 			res.json(profile);
+		}
+	});
+});
+
+router.put('/profile/:id/upload', (req, res) => {
+	Profile.findById(req.params.id, (err, profile) => {
+		if (err) {
+			return res.status(500).json({ message: 'Cannot find the user profile' });
+		}
+		else {
+			let files = req.body;
+			console.log(files);
+			for (let i = 0; i < files; i++) {
+				profile.photos.push(files[i]);
+			}
+			return res.json(`Upload completed successfully.`);
 		}
 	});
 });
