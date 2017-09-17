@@ -42,13 +42,12 @@ router.get('/profiles/:id', function (req, res) {
 router.put('/profile/:id/upload', (req, res) => {
 	Profile.findById(req.params.id, (err, profile) => {
 		if (err) {
-			return res.status(500).json({ message: 'Cannot find the user profile' });
+			return res.status(500).json({ message: 'Cannot find the user profile.' });
 		}
 		else {
 			let file = req.body.image;
-			let photos = string[] = profile.photos;
-			Profile.update({ _id: req.params.id }, { $set: { photos: photos } }, (err, cb) => {
-				profile.photos.push(file);
+			profile.photos.push(file);
+			Profile.update({ _id: req.params.id }, profile, (err, cb) => {
 				return res.json({ message: `Upload completed successfully.`, file: cb });
 			});
 		}
