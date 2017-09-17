@@ -40,18 +40,35 @@ router.get('/profiles/:id', function (req, res) {
 });
 
 router.put('/profile/:id/upload', (req, res) => {
-	Profile.findById(req.params.id, (err, profile) => {
-		if (err) {
-			return res.status(500).json({ message: 'Cannot find the user profile.' });
-		}
-		else {
-			let file = req.body.image;
-			profile.photos.push(file);
-			Profile.update({ _id: req.params.id }, profile, (err, cb) => {
-				return res.json({ message: `Upload completed successfully.`, file: cb });
-			});
-		}
-	});
+	let q = req.query.avatar;
+	if (q) {
+		Profile.findById(req.params.id, (err, profile) => {
+			if (err) {
+				return res.status(500).json({ message: 'Profile Update failed.' });
+			}
+			else {
+				let file = req.body.image;
+				profile.avatar_url = file;
+				Profile.update({ _id: req.params.id }, profile, (err, cb) => {
+					return res.json({ message: `Profile picture updated successfully.`, file: cb });
+				});
+			}
+		});
+	}
+	else {
+		Profile.findById(req.params.id, (err, profile) => {
+			if (err) {
+				return res.status(500).json({ message: 'Cannot find the user profile.' });
+			}
+			else {
+				let file = req.body.image;
+				profile.photos.push(file);
+				Profile.update({ _id: req.params.id }, profile, (err, cb) => {
+					return res.json({ message: `Upload completed successfully.`, file: cb });
+				});
+			}
+		});
+	}
 });
 
 router.put('/profiles/:id', (req, res, next) => {
