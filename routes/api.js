@@ -40,10 +40,10 @@ router.post('/chats/:id', (req, res) => {
 			msgs.push({ content: req.body.message, sent: Date.now() });
 			Chat.findByIdAndUpdate(thread[0]._id, { $set: { messages: msgs } }, (err, res) => {
 				if (err) {
-					return res.json({ message: 'An error occured sending the message' + err.message });
+					 res.json({ message: 'An error occured sending the message' + err.message });
 				}
 				else {
-					return res.json({ message: 'Message sent.' });
+					 res.json({ message: 'Message sent.' });
 				}
 			});
 		}
