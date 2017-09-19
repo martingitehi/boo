@@ -100,7 +100,7 @@ router.put('/profile/:id/upload', (req, res) => {
 				return res.status(500).json({ message: 'Profile Update failed.' });
 			}
 			else {
-				let file = req.body.file.name;
+				let file = req.body.image;
 				profile.avatar_url = file;
 
 				Profile.update({ _id: req.params.id }, profile, (err, cb) => {
