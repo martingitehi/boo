@@ -92,7 +92,7 @@ router.get('/profiles/:id', function (req, res) {
 
 router.put('/profile/:id/upload', (req, res) => {
 	let q = req.query.avatar;
-	console.log(req.body);
+	console.log(req.query.avatar);
 	// console.log(q);
 	if (q == true) {
 		Profile.findById(req.params.id, (err, profile) => {
