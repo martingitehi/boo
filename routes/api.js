@@ -92,8 +92,6 @@ router.get('/profiles/:id', function (req, res) {
 
 router.put('/profile/:id/upload', (req, res) => {
 	let q = req.query.avatar;
-	console.log(req.query.avatar);
-	// console.log(q);
 	if (q == true) {
 		Profile.findById(req.params.id, (err, profile) => {
 			if (err) {
@@ -104,7 +102,7 @@ router.put('/profile/:id/upload', (req, res) => {
 				profile.avatar_url = file;
 
 				Profile.update({ _id: req.params.id }, profile, (err, cb) => {
-					return res.json({ message: `Profile picture updated successfully.`, file: cb });
+					return res.json({ message: `Profile picture updated successfully.`});
 				});
 			}
 		});
