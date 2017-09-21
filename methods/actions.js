@@ -8,7 +8,7 @@ var bcrypt = require('bcrypt-nodejs');
 var mongoose = require('mongoose');
 
 var functions = {
-    login: function (req, res, next) {
+    login: (req, res, next) => {
         Profile.findOne({ username: req.body.username }, function (err, profile) {
             if (err) {
                 res.json({ message: 'An error occured signing in.' });
@@ -31,7 +31,7 @@ var functions = {
             }
         })
     },
-    signup: function (req, res, next) {
+    signup: (req, res, next) => {
         if ((!req.body.username) || (!req.body.password)) {
             return res.json({ success: false, msg: 'Enter all values' });
         }
@@ -65,7 +65,7 @@ var functions = {
             });
         }
     },
-    getinfo: function (req, res) {
+    getinfo: (req, res) => {
         if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
             var token = req.headers.authorization.split(' ')[1];
             var decodedtoken = jwt.decode(token, config.secret);

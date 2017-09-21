@@ -50,7 +50,7 @@ router.post('/chats/:id', (req, res) => {
 		else {
 			let chat = new Chat();
 			chat.sender = req.body.sender;
-			chat.to = req.body.sender;
+			chat.to = req.body.to;
 			chat.messages.push(
 				{
 					content: req.body.message, sent: Date.now()
@@ -127,14 +127,23 @@ router.put('/profiles/:id', (req, res, next) => {
 });
 
 router.delete('/profiles/:id', (req, res, next) => {
-	Profile.remove({ _id: req.params.id }, (err) => {
-		if (err) {
-			return res.json(err.message);
+	Profile.findOne({ _id: req.param.id }, (err, profile) => {
+		if (req.body.password != null && bcrypt.compareSync(req.body.password, profile.password) == true) {
+			Profile.remove({ _id: req.params.id }, (err) => {
+				if (err) {
+					return res.json(err.message);
+				}
+				else {
+					return res.json({ message: 'Profile deleted successfully.' });
+				}
+			});
 		}
 		else {
-			return res.json({ message: 'Profile deleted successfully.' });
+			res.json({ message: 'You must confirm your account before deletion.' });
 		}
-	})
+
+	});
+
 })
 
 module.exports = router;
