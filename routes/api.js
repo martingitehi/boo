@@ -118,7 +118,6 @@ router.put('/profiles/:id', (req, res, next) => {
 					return res.status(500).json(err.message);
 				}
 				else {
-					console.log(profile);
 					return res.json(`Update complete for ${profile.username}`);
 				}
 			});
