@@ -26,7 +26,7 @@ var profileSchema = new mongoose.Schema({
 		status: { type: String, required: [true, "You must provide a relationship status"] },
 		goal: { type: String, required: false },
 		family: {
-			has_kids: { type: Boolean, required: true },
+			has_kids: { type: String, required: true, default: 'No' },
 			no_of_kids: { type: Number, required: true, default: 0 }
 		}
 	},
@@ -40,7 +40,7 @@ var profileSchema = new mongoose.Schema({
 			last_tested: { type: Date, required: true }
 		},
 		disability: {
-			is_disabled: { type: Boolean, required: true, default: false },
+			is_disabled: { type: String, required: true, default: 'No' },
 			disability_type: { type: String, required: true }
 		}
 	},
@@ -48,7 +48,7 @@ var profileSchema = new mongoose.Schema({
 		sex: { type: String, required: true },
 		others: { type: Array, required: false }
 	},
-	social: { 
+	social: {
 		fb: { type: String },
 		instagram: { type: String }
 	},

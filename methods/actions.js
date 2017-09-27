@@ -48,7 +48,7 @@ var functions = {
                     res.json({ success: false, message: `Sorry '${req.body.username}' is already taken.` });
                 } else {
                     let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-                    req.body.password = password;                    
+                    req.body.password = password;
                     req.body.username = req.body.username.toLowerCase();
                     var newProfile = new Profile(req.body);
 
@@ -64,6 +64,16 @@ var functions = {
                 }
             });
         }
+    },
+    remove: (req, res) => {
+        Profile.remove({ _id: req.params.id }, (err) => {
+            if (err) {
+                return res.json({ success: false, message: err.message });
+            }
+            else {
+                return res.json({ success: true, message: 'Account deleted successfully.' });
+            }
+        })
     },
     getinfo: (req, res) => {
         if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
